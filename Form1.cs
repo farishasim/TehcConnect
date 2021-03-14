@@ -13,7 +13,7 @@ namespace TubesGraph
 {
     public partial class Form1 : Form
     {
-        public int totalNodes;
+        public int totalEdge;
         public string fileContent;
         public string[] fileLines;
         public string[] nodeIn;
@@ -32,10 +32,10 @@ namespace TubesGraph
 
             this.fileContent="";
             this.fileLines = File.ReadAllLines(fileName);
-            this.totalNodes = int.Parse(this.fileLines[0]);
+            this.totalEdge = int.Parse(this.fileLines[0]);
 
             //Read file per line
-            for (int i = 0; i <= this.totalNodes; i++)
+            for (int i = 0; i <= this.totalEdge; i++)
             {
                 if (i != 0)
                 {
@@ -44,14 +44,14 @@ namespace TubesGraph
             }
 
             //Read all nodes
-            this.nodeIn = new string[this.totalNodes];
-            this.nodeOut = new string[this.totalNodes];
-            for (int i = 0; i <= this.totalNodes; i++)
+            this.nodeOut = new string[this.totalEdge];
+            this.nodeIn = new string[this.totalEdge];
+            for (int i = 0; i <= this.totalEdge; i++)
             {
                 if (i > 0)
                 {
-                    this.nodeIn[i-1] += this.fileLines[i][0];
-                    this.nodeOut[i-1] += this.fileLines[i][2];
+                    this.nodeOut[i-1] += this.fileLines[i][0];
+                    this.nodeIn[i-1] += this.fileLines[i][2];
                 }
             }
 
@@ -61,15 +61,15 @@ namespace TubesGraph
             //Create graph object
             Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
 
-            for (int i = 0; i < this.totalNodes; i++)
+            for (int i = 0; i < this.totalEdge; i++)
             {
-                graph.AddEdge(this.nodeIn[i], this.nodeOut[i]).Attr.Color = Microsoft.Msagl.Drawing.Color.MediumSpringGreen;
-
-                graph.FindNode(this.nodeIn[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
-                graph.FindNode(this.nodeIn[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
+                graph.AddEdge(this.nodeOut[i], this.nodeIn[i]).Attr.Color = Microsoft.Msagl.Drawing.Color.MediumSpringGreen;
 
                 graph.FindNode(this.nodeOut[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
                 graph.FindNode(this.nodeOut[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
+
+                graph.FindNode(this.nodeIn[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
+                graph.FindNode(this.nodeIn[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
             }
 
             //Deploy graph
