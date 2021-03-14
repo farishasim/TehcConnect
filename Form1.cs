@@ -13,11 +13,6 @@ namespace TubesGraph
 {
     public partial class Form1 : Form
     {
-        public int totalEdge;
-        public string fileContent;
-        public string[] fileLines;
-        public Processor processor;
-
         public Form1()
         {
             InitializeComponent();
@@ -30,52 +25,36 @@ namespace TubesGraph
             string fileName = openFileDialog1.FileName;
             textBox1.Text = fileName;
 
-            this.fileContent="";
-            this.fileLines = File.ReadAllLines(fileName);
-            this.totalEdge = int.Parse(this.fileLines[0]);
+            Processor Processor = new Processor(fileName);
+
 
             //Read file per line
-            for (int i = 0; i <= this.totalEdge; i++)
+            for (int i = 0; i <= Processor.totalEdge; i++)
             {
                 if (i != 0)
                 {
-                    this.fileContent += this.fileLines[i] + "\n";
+                    Processor.fileContent += Processor.fileLines[i] + "\n";
                 }
             }
 
             //Read all nodes
-            /* this.nodeIn = new string[this.totalNodes];
-            this.nodeOut = new string[this.totalNodes];
-            for (int i = 0; i <= this.totalNodes; i++)
+            Processor.setupNodes();
+            richTextBox1.Text = Processor.fileContent;
+
+
+            gViewer1.Graph = Processor.process();
+
+
+            if (checkBox1.Checked)
             {
-                if (i > 0)
-                {
-                    this.nodeOut[i-1] += this.fileLines[i][0];
-                    this.nodeIn[i-1] += this.fileLines[i][2];
-                }
-            } */
-
-            richTextBox1.Text = this.fileContent;
-
-            processor = new Processor(fileName);
-
-            //Create graph object
-            /* Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
-
-            for (int i = 0; i < this.totalEdge; i++)
-            {
-                graph.AddEdge(this.nodeOut[i], this.nodeIn[i]).Attr.Color = Microsoft.Msagl.Drawing.Color.MediumSpringGreen;
-
-                graph.FindNode(this.nodeOut[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
-                graph.FindNode(this.nodeOut[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
-
-                graph.FindNode(this.nodeIn[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
-                graph.FindNode(this.nodeIn[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
+                //isi algoritma BFS
             }
 
-            //Deploy graph
-            gViewer1.Graph = graph; */
-            gViewer1.Graph = processor.process();
+            else if(checkBox2.Checked)
+            {
+                //isi algoritma DFS
+            }
+   
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -106,15 +85,27 @@ namespace TubesGraph
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
+            checkBox2.Checked = false;
 
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
+            checkBox1.Checked = false;
 
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

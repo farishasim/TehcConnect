@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+
 namespace TubesGraph
 {
-    public class Processor 
+    public class Processor
     {
-        public int totalNodes;
+        public int totalEdge;
+        public string fileContent;
         public string[] fileLines;
         public string[] nodeIn;
         public string[] nodeOut;
@@ -15,21 +17,22 @@ namespace TubesGraph
 
         public Processor(string fileName)
         {
+            this.fileContent = "";
             this.fileLines = File.ReadAllLines(fileName);
-            this.totalNodes = int.Parse(this.fileLines[0]);
+            this.totalEdge = int.Parse(this.fileLines[0]);
             this.setupNodes();
         }
 
-        private void setupNodes()
+        public void setupNodes()
         {
-            this.nodeIn = new string[this.totalNodes];
-            this.nodeOut = new string[this.totalNodes];
-            for (int i = 0; i <= this.totalNodes; i++)
+            this.nodeOut = new string[this.totalEdge];
+            this.nodeIn = new string[this.totalEdge];
+            for (int i = 0; i <= this.totalEdge; i++)
             {
                 if (i > 0)
                 {
-                    this.nodeIn[i - 1] += this.fileLines[i][0];
-                    this.nodeOut[i - 1] += this.fileLines[i][2];
+                    this.nodeOut[i - 1] += this.fileLines[i][0];
+                    this.nodeIn[i - 1] += this.fileLines[i][2];
                 }
             }
         }
@@ -38,15 +41,15 @@ namespace TubesGraph
         {
             this.graph = new Microsoft.Msagl.Drawing.Graph("graph");
 
-            for (int i = 0; i < this.totalNodes; i++)
+            for (int i = 0; i < this.totalEdge; i++)
             {
-                this.graph.AddEdge(this.nodeIn[i], this.nodeOut[i]).Attr.Color = Microsoft.Msagl.Drawing.Color.MediumSpringGreen;
+                graph.AddEdge(this.nodeOut[i], this.nodeIn[i]).Attr.Color = Microsoft.Msagl.Drawing.Color.MediumSpringGreen;
 
-                this.graph.FindNode(this.nodeIn[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
-                this.graph.FindNode(this.nodeIn[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
+                graph.FindNode(this.nodeOut[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
+                graph.FindNode(this.nodeOut[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
 
-                this.graph.FindNode(this.nodeOut[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
-                this.graph.FindNode(this.nodeOut[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
+                graph.FindNode(this.nodeIn[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
+                graph.FindNode(this.nodeIn[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
             }
 
             // kalo nanti versi lengkapnya, sebelum di return si graphnya harusnya di solve dulu
