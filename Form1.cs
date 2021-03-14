@@ -45,7 +45,7 @@ namespace TubesGraph
             gViewer1.Graph = Processor.process();
 
 
-            if (checkBox1.Checked)
+            /* if (checkBox1.Checked)
             {
                 //isi algoritma BFS
             }
@@ -53,7 +53,7 @@ namespace TubesGraph
             else if(checkBox2.Checked)
             {
                 //isi algoritma DFS
-            }
+            } */
    
         }
 
@@ -81,19 +81,7 @@ namespace TubesGraph
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            checkBox2.Checked = false;
-
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            checkBox1.Checked = false;
-
-        }
+        }      
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
@@ -108,6 +96,16 @@ namespace TubesGraph
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton2.AutoCheck = true;
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton1.AutoCheck = true;
         }
     }
 }
