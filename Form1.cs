@@ -16,8 +16,8 @@ namespace TubesGraph
         public int totalNodes;
         public string fileContent;
         public string[] fileLines;
-        public string[] nodeIn;
-        public string[] nodeOut;
+        public Processor processor;
+
         public Form1()
         {
             InitializeComponent();
@@ -44,7 +44,7 @@ namespace TubesGraph
             }
 
             //Read all nodes
-            this.nodeIn = new string[this.totalNodes];
+            /* this.nodeIn = new string[this.totalNodes];
             this.nodeOut = new string[this.totalNodes];
             for (int i = 0; i <= this.totalNodes; i++)
             {
@@ -53,13 +53,14 @@ namespace TubesGraph
                     this.nodeIn[i-1] += this.fileLines[i][0];
                     this.nodeOut[i-1] += this.fileLines[i][2];
                 }
-            }
+            } */
 
             richTextBox1.Text = this.fileContent;
 
+            processor = new Processor(fileName);
 
             //Create graph object
-            Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
+            /* Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
 
             for (int i = 0; i < this.totalNodes; i++)
             {
@@ -73,7 +74,8 @@ namespace TubesGraph
             }
 
             //Deploy graph
-            gViewer1.Graph = graph;
+            gViewer1.Graph = graph; */
+            gViewer1.Graph = processor.process();
         }
 
         private void Form1_Load(object sender, EventArgs e)
