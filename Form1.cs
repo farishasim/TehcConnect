@@ -25,24 +25,24 @@ namespace TubesGraph
             string fileName = openFileDialog1.FileName;
             textBox1.Text = fileName;
 
-            Processor Processor = new Processor(fileName);
+            Processor Process = new Processor(fileName);
 
 
             //Read file per line
-            for (int i = 0; i <= Processor.totalEdge; i++)
+            for (int i = 0; i <= Process.totalEdge; i++)
             {
                 if (i != 0)
                 {
-                    Processor.fileContent += Processor.fileLines[i] + "\n";
+                    Process.fileContent += Process.fileLines[i] + "\n";
                 }
             }
 
             //Read all nodes
-            Processor.setupNodes();
-            richTextBox1.Text = Processor.fileContent;
+            Process.setupNodes();
+            richTextBox1.Text = Process.fileContent;
 
 
-            gViewer1.Graph = Processor.process();
+            gViewer1.Graph = Process.process();
 
 
             /* if (checkBox1.Checked)
@@ -54,7 +54,37 @@ namespace TubesGraph
             {
                 //isi algoritma DFS
             } */
-   
+
+            int totalNode = Process.allNode.Count();
+            for (int i = 0; i < totalNode; i++)
+            {
+                comboBox1.Items.Add(Process.nodeIn[i]);
+                comboBox1.Items.Add(Process.nodeOut[i]);
+            }
+
+            List<string> allNodes = new List<string>();
+            foreach (string S in comboBox1.Items)
+            {
+                if (!allNodes.Contains(S))
+                {
+                    allNodes.Add(S);
+                }
+            }
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(allNodes.ToArray());
+
+            
+            foreach (string S in comboBox2.Items)
+            {
+                if (!allNodes.Contains(S))
+                {
+                    allNodes.Add(S);
+                }
+            }
+            comboBox2.Items.Clear();
+            comboBox2.Items.AddRange(allNodes.ToArray());
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -93,7 +123,7 @@ namespace TubesGraph
 
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

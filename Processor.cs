@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Linq;
 
 
 namespace TubesGraph
@@ -13,6 +14,9 @@ namespace TubesGraph
         public string[] fileLines;
         public string[] nodeIn;
         public string[] nodeOut;
+        public string[] allNode;
+
+
         private Microsoft.Msagl.Drawing.Graph graph;
 
         public Processor(string fileName)
@@ -35,6 +39,11 @@ namespace TubesGraph
                     this.nodeIn[i - 1] += this.fileLines[i][2];
                 }
             }
+
+            allNode = nodeOut.ToArray();
+
+
+
         }
 
         public Microsoft.Msagl.Drawing.Graph process()
@@ -58,8 +67,9 @@ namespace TubesGraph
             }
 
             // kalo nanti versi lengkapnya, sebelum di return si graphnya harusnya di solve dulu
-            // berdasrkan pilihan algoritmanya BFS atau DFS
+            // berdasarkan pilihan algoritmanya BFS atau DFS
             return this.graph;
         }
     }
 }
+

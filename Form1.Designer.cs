@@ -38,13 +38,13 @@ namespace TubesGraph
             this.gViewer1 = new Microsoft.Msagl.GraphViewerGdi.GViewer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -54,10 +54,9 @@ namespace TubesGraph
             // 
             // OpenFileBtn
             // 
-            this.OpenFileBtn.Location = new System.Drawing.Point(379, 40);
-            this.OpenFileBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.OpenFileBtn.Location = new System.Drawing.Point(332, 30);
             this.OpenFileBtn.Name = "OpenFileBtn";
-            this.OpenFileBtn.Size = new System.Drawing.Size(105, 47);
+            this.OpenFileBtn.Size = new System.Drawing.Size(92, 35);
             this.OpenFileBtn.TabIndex = 0;
             this.OpenFileBtn.Text = "Open File";
             this.OpenFileBtn.UseVisualStyleBackColor = true;
@@ -65,10 +64,9 @@ namespace TubesGraph
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(23, 49);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox1.Location = new System.Drawing.Point(20, 37);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(339, 27);
+            this.textBox1.Size = new System.Drawing.Size(297, 23);
             this.textBox1.TabIndex = 1;
             // 
             // openFileDialog1
@@ -78,8 +76,7 @@ namespace TubesGraph
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(57, 41);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(50, 42);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(325, 203);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -89,10 +86,9 @@ namespace TubesGraph
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(45, 389);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.richTextBox1.Location = new System.Drawing.Point(39, 292);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(61, 389);
+            this.richTextBox1.Size = new System.Drawing.Size(54, 293);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -112,9 +108,8 @@ namespace TubesGraph
             this.gViewer1.InsertingEdge = false;
             this.gViewer1.LayoutAlgorithmSettingsButtonVisible = false;
             this.gViewer1.LayoutEditingEnabled = true;
-            this.gViewer1.Location = new System.Drawing.Point(178, 389);
+            this.gViewer1.Location = new System.Drawing.Point(156, 292);
             this.gViewer1.LooseOffsetForRouting = 0.25D;
-            this.gViewer1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gViewer1.MouseHitDistance = 0.05D;
             this.gViewer1.Name = "gViewer1";
             this.gViewer1.NavigationVisible = true;
@@ -127,7 +122,7 @@ namespace TubesGraph
             this.gViewer1.SaveButtonVisible = true;
             this.gViewer1.SaveGraphButtonVisible = true;
             this.gViewer1.SaveInVectorFormatEnabled = true;
-            this.gViewer1.Size = new System.Drawing.Size(415, 391);
+            this.gViewer1.Size = new System.Drawing.Size(363, 293);
             this.gViewer1.TabIndex = 4;
             this.gViewer1.TightOffsetForRouting = 0.125D;
             this.gViewer1.ToolBarIsVisible = true;
@@ -142,11 +137,9 @@ namespace TubesGraph
             // 
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.OpenFileBtn);
-            this.groupBox1.Location = new System.Drawing.Point(449, 71);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Location = new System.Drawing.Point(393, 53);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(511, 116);
+            this.groupBox1.Size = new System.Drawing.Size(447, 87);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Graph File :";
@@ -156,33 +149,55 @@ namespace TubesGraph
             // 
             this.groupBox2.Controls.Add(this.radioButton2);
             this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Location = new System.Drawing.Point(449, 211);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Location = new System.Drawing.Point(393, 158);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(511, 99);
+            this.groupBox2.Size = new System.Drawing.Size(447, 74);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Algorithm :";
             // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(271, 33);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(45, 19);
+            this.radioButton2.TabIndex = 8;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "DFS";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(100, 33);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(44, 19);
+            this.radioButton1.TabIndex = 7;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "BFS";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(30, 55);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboBox1.Location = new System.Drawing.Point(26, 41);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(138, 28);
-            this.comboBox1.TabIndex = 9;
+            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.Sorted = true;
+            this.comboBox1.TabIndex = 50;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.comboBox1);
-            this.groupBox3.Location = new System.Drawing.Point(671, 401);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox3.Location = new System.Drawing.Point(587, 301);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox3.Size = new System.Drawing.Size(205, 133);
+            this.groupBox3.Size = new System.Drawing.Size(179, 100);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Choose Account :";
@@ -190,11 +205,9 @@ namespace TubesGraph
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.comboBox2);
-            this.groupBox4.Location = new System.Drawing.Point(671, 567);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox4.Location = new System.Drawing.Point(587, 425);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox4.Size = new System.Drawing.Size(205, 133);
+            this.groupBox4.Size = new System.Drawing.Size(179, 100);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Explore friends with :";
@@ -202,52 +215,26 @@ namespace TubesGraph
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(30, 55);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboBox2.Location = new System.Drawing.Point(26, 41);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(138, 28);
+            this.comboBox2.Size = new System.Drawing.Size(121, 23);
             this.comboBox2.TabIndex = 9;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(715, 727);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button2.Location = new System.Drawing.Point(626, 545);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(120, 39);
+            this.button2.Size = new System.Drawing.Size(105, 29);
             this.button2.TabIndex = 12;
             this.button2.Text = "Submit";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(114, 44);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(54, 24);
-            this.radioButton1.TabIndex = 7;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "BFS";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(310, 44);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(56, 24);
-            this.radioButton2.TabIndex = 8;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "DFS";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1017, 999);
+            this.ClientSize = new System.Drawing.Size(941, 562);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -256,7 +243,6 @@ namespace TubesGraph
             this.Controls.Add(this.gViewer1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
