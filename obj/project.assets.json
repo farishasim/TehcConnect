@@ -115,19 +115,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\karls\\.nuget\\packages\\": {}
+    "C:\\Users\\HASIM\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\karls\\Documents\\KULIAH\\Semester 4\\STIGMA\\Tubes2\\TubesGraph.csproj",
+      "projectUniqueName": "C:\\Users\\HASIM\\Kuliah\\04-Stima\\Tubes2\\TubesGraph\\TubesGraph.csproj",
       "projectName": "TubesGraph",
-      "projectPath": "C:\\Users\\karls\\Documents\\KULIAH\\Semester 4\\STIGMA\\Tubes2\\TubesGraph.csproj",
-      "packagesPath": "C:\\Users\\karls\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\karls\\Documents\\KULIAH\\Semester 4\\STIGMA\\Tubes2\\obj\\",
+      "projectPath": "C:\\Users\\HASIM\\Kuliah\\04-Stima\\Tubes2\\TubesGraph\\TubesGraph.csproj",
+      "packagesPath": "C:\\Users\\HASIM\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HASIM\\Kuliah\\04-Stima\\Tubes2\\TubesGraph\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\karls\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HASIM\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
