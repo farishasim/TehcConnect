@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace TubesGraph
 {
@@ -8,6 +10,20 @@ namespace TubesGraph
     {
         private bool[] visited;
         private List<int> path;
+
+        private Processor processor;
+        private Form1 form1;
+
+        public DFSearcher() // default constructr biar gk eror
+        {
+
+        }
+
+        public DFSearcher(Processor processor, Form1 form1)
+        {
+            this.processor = processor;
+            this.form1 = form1;
+        }
 
         private void Initial(int n_nodes)
         {
@@ -22,12 +38,13 @@ namespace TubesGraph
 
         public List<int> Search(int node1, int node2, Graph graph)
         {
-            bool found = false;
+            bool found;
             
             Initial(graph.CountNode());
 
             visited[node1] = true;
             path.Add(node1);
+            VisualizeStep();
             found = DepthFirstSearch(graph, node1, node2);
 
             if (!found)
@@ -58,7 +75,8 @@ namespace TubesGraph
                     visited[i] = true;
 
                     // masukkan node ke path
-                    path.Add(i); 
+                    path.Add(i);
+                    VisualizeStep();
 
                     // periksa secara rekursif untuk node selanjutnya secara DFS
                     found = DepthFirstSearch(graph, i, target);
@@ -77,6 +95,14 @@ namespace TubesGraph
 
             // jika tidak ditemukan satupun path dari node ini, maka return false dan backtrack
             return found;
+        }
+
+        private void VisualizeStep()
+        {
+            processor.process();
+            form1.UpdateGraphFromThread(processor.UpdateGraph(path).GetVisualGraph());
+
+            Thread.Sleep(500);
         }
     }
 }

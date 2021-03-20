@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace TubesGraph
 {
@@ -15,6 +16,10 @@ namespace TubesGraph
     {
         private Processor Process;
         private bool fileLoaded;
+        public delegate void delUpdateVisGraph(Microsoft.Msagl.Drawing.Graph graph);
+
+        ThreadStart threadStart;
+        Thread processingThread;
 
         public Form1()
         {
@@ -28,7 +33,7 @@ namespace TubesGraph
             string fileName = openFileDialog1.FileName;
             textBox1.Text = fileName;
 
-            Process = new Processor(fileName);
+            Process = new Processor(fileName, this);
             fileLoaded = true;
 
             //Read file per line
@@ -77,14 +82,29 @@ namespace TubesGraph
             comboBox2.Items.AddRange(allNodes.ToArray());
 
 
+            threadStart = new ThreadStart(StartProcessing);
+            processingThread = new Thread(threadStart);
+
+            processingThread.Name = "Solving Process";
+            processingThread.Start();
+        }
+
+        private void StartProcessing()
+        {
+            // thread process
+            // thread ini akan melakukan process algoritma
+
             // testing A -> H
-            
             Process.SetNodeSrc("A");
             Process.SetNodeDst("H");
 
             Process.SetAlgorithm(1); // test dfs
 
-            gViewer1.Graph = Process.ProcessPath().GetVisualGraph();
+            Process.ProcessPath();
+
+            delUpdateVisGraph DelUpdateVisGraph = new delUpdateVisGraph(VisualizeGraph);
+
+            this.gViewer1.BeginInvoke(DelUpdateVisGraph, Process.GetVisualGraph());
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -144,6 +164,18 @@ namespace TubesGraph
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             radioButton1.AutoCheck = true;
+        }
+
+        public void UpdateGraphFromThread(Microsoft.Msagl.Drawing.Graph visualGraph)
+        {
+            delUpdateVisGraph DelUpdateVisGraph = new delUpdateVisGraph(VisualizeGraph);
+
+            this.gViewer1.BeginInvoke(DelUpdateVisGraph, visualGraph);
+        }
+
+        public void VisualizeGraph(Microsoft.Msagl.Drawing.Graph visualGraph)
+        {
+            this.gViewer1.Graph = visualGraph;
         }
     }
 }

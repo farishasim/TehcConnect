@@ -24,13 +24,21 @@ namespace TubesGraph
         private string nodeDst;
         private List<string> nodes;
 
-        public Processor(string fileName)
+        private Form1 form1;
+
+        public Processor()
+        {
+
+        }
+
+        public Processor(string fileName, Form1 form1)
         {
             this.fileContent = "";
             this.fileLines = File.ReadAllLines(fileName);
             this.totalEdge = int.Parse(this.fileLines[0]);
             this.SetupNodes();
             this.SetupGraph();
+            this.form1 = form1;
         }
 
         private void SetupNodes()
@@ -89,7 +97,7 @@ namespace TubesGraph
             return this.visualGraph;
         }
 
-        public Processor ProcessPath()
+        public void ProcessPath()
         {
             List<int> path = new List<int>();
             Searcher searcher;
@@ -99,7 +107,7 @@ namespace TubesGraph
             if (choice == 1)
             {
                 // gunakan DFS
-                searcher = new DFSearcher();
+                searcher = new DFSearcher(this, form1);
                 path = searcher.Search(nodes.IndexOf(nodeSrc), nodes.IndexOf(nodeDst), graph);
             } else
             {
@@ -112,10 +120,10 @@ namespace TubesGraph
                 UpdateGraph(path); // update visual graph
             }
 
-            return this; // supaya dapat dilakukan method-chaining
+            //return this; // supaya dapat dilakukan method-chaining
         }
 
-        private void UpdateGraph(List<int> path)
+        public Processor UpdateGraph(List<int> path)
         {
             int i; string thisNode;
             for (i = 0; i < path.Count(); i++) // traversal satu per satu pada path
@@ -138,7 +146,7 @@ namespace TubesGraph
                 }
             }
 
-            // return visualGraph;
+            return this;
         }
 
         public void SetNodeSrc(string node)
