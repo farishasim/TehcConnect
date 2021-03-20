@@ -228,6 +228,16 @@ namespace TubesGraph
             this.button2.TabIndex = 12;
             this.button2.Text = "Submit";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            /*
+            this.OpenFileBtn.Location = new System.Drawing.Point(332, 30);
+            this.OpenFileBtn.Name = "OpenFileBtn";
+            this.OpenFileBtn.Size = new System.Drawing.Size(92, 35);
+            this.OpenFileBtn.TabIndex = 0;
+            this.OpenFileBtn.Text = "Open File";
+            this.OpenFileBtn.UseVisualStyleBackColor = true;
+            this.OpenFileBtn.Click += new System.EventHandler(this.button1_Click);
+             */
             // 
             // Form1
             // 

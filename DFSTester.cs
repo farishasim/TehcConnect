@@ -6,13 +6,13 @@ namespace TubesGraph
 {
     static class DFSTester
     {
-        static void Main()
+        static void Mainr()
         {
             Graph graph = new Graph(8);
 
             String akun = "ABCDEFGH";
             char akun1 = 'A';
-            char akun2 = 'H';
+            char akun2 = 'D';
 
             // akan dicari path dari akun1 ke akun2;
 

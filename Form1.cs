@@ -13,6 +13,9 @@ namespace TubesGraph
 {
     public partial class Form1 : Form
     {
+        private Processor Process;
+        private bool fileLoaded;
+
         public Form1()
         {
             InitializeComponent();
@@ -25,8 +28,8 @@ namespace TubesGraph
             string fileName = openFileDialog1.FileName;
             textBox1.Text = fileName;
 
-            Processor Process = new Processor(fileName);
-
+            Process = new Processor(fileName);
+            fileLoaded = true;
 
             //Read file per line
             for (int i = 0; i <= Process.totalEdge; i++)
@@ -38,22 +41,11 @@ namespace TubesGraph
             }
 
             //Read all nodes
-            Process.setupNodes();
             richTextBox1.Text = Process.fileContent;
 
 
             gViewer1.Graph = Process.process();
 
-
-            /* if (checkBox1.Checked)
-            {
-                //isi algoritma BFS
-            }
-
-            else if(checkBox2.Checked)
-            {
-                //isi algoritma DFS
-            } */
 
             int totalNode = Process.allNode.Count();
             for (int i = 0; i < totalNode; i++)
@@ -85,6 +77,22 @@ namespace TubesGraph
             comboBox2.Items.AddRange(allNodes.ToArray());
 
 
+            // testing A -> H
+            
+            Process.SetNodeSrc("A");
+            Process.SetNodeDst("H");
+
+            Process.SetAlgorithm(1); // test dfs
+
+            gViewer1.Graph = Process.ProcessPath().GetVisualGraph();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (fileLoaded)
+            {
+
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)

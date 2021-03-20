@@ -16,18 +16,24 @@ namespace TubesGraph
         public string[] nodeOut;
         public string[] allNode;
 
+        private int choice; // pilihan algoritma
+        private Graph graph;
+        private Microsoft.Msagl.Drawing.Graph visualGraph;
 
-        private Microsoft.Msagl.Drawing.Graph graph;
+        private string nodeSrc;
+        private string nodeDst;
+        private List<string> nodes;
 
         public Processor(string fileName)
         {
             this.fileContent = "";
             this.fileLines = File.ReadAllLines(fileName);
             this.totalEdge = int.Parse(this.fileLines[0]);
-            this.setupNodes();
+            this.SetupNodes();
+            this.SetupGraph();
         }
 
-        public void setupNodes()
+        private void SetupNodes()
         {
             this.nodeOut = new string[this.totalEdge];
             this.nodeIn = new string[this.totalEdge];
@@ -42,33 +48,117 @@ namespace TubesGraph
 
             allNode = nodeOut.ToArray();
 
+            this.nodes = new List<string>();
+            nodes = allNode.Union(nodeIn).Distinct().ToList();
+            nodes.Sort(); //sort nodes berdasakan alfabet
+        }
 
-
+        private void SetupGraph()
+        {
+            graph = new Graph(nodes.Count());
+            foreach (string node in nodes)
+            {
+                graph.AddNode(nodes.IndexOf(node));
+            }
+            for (int i = 0; i < totalEdge; i++)
+            {
+                graph.AddEdge(nodes.IndexOf(nodeIn[i]), nodes.IndexOf(nodeOut[i]));
+            }
         }
 
         public Microsoft.Msagl.Drawing.Graph process()
         {
-            this.graph = new Microsoft.Msagl.Drawing.Graph("graph");
+            this.visualGraph = new Microsoft.Msagl.Drawing.Graph("graph");
 
             for (int i = 0; i < this.totalEdge; i++)
             {
                 // graph.AddEdge(this.nodeOut[i], this.nodeIn[i]).Attr.Color = Microsoft.Msagl.Drawing.Color.MediumSpringGreen;
-                var Edge = graph.AddEdge(this.nodeOut[i], this.nodeIn[i]);
+                var Edge = visualGraph.AddEdge(this.nodeOut[i], this.nodeIn[i]);
 
                 Edge.Attr.ArrowheadAtTarget = Microsoft.Msagl.Drawing.ArrowStyle.None;
                 Edge.Attr.ArrowheadAtSource = Microsoft.Msagl.Drawing.ArrowStyle.None;
+                Edge.Attr.Color = Microsoft.Msagl.Drawing.Color.SpringGreen;
 
+                visualGraph.FindNode(this.nodeOut[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
+                visualGraph.FindNode(this.nodeOut[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
 
-                graph.FindNode(this.nodeOut[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
-                graph.FindNode(this.nodeOut[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
-
-                graph.FindNode(this.nodeIn[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
-                graph.FindNode(this.nodeIn[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
+                visualGraph.FindNode(this.nodeIn[i]).Attr.FillColor = Microsoft.Msagl.Drawing.Color.SpringGreen;
+                visualGraph.FindNode(this.nodeIn[i]).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
             }
 
-            // kalo nanti versi lengkapnya, sebelum di return si graphnya harusnya di solve dulu
-            // berdasarkan pilihan algoritmanya BFS atau DFS
-            return this.graph;
+            return this.visualGraph;
+        }
+
+        public Processor ProcessPath()
+        {
+            List<int> path = new List<int>();
+            Searcher searcher;
+
+            this.process(); // reset visual graph
+
+            if (choice == 1)
+            {
+                // gunakan DFS
+                searcher = new DFSearcher();
+                path = searcher.Search(nodes.IndexOf(nodeSrc), nodes.IndexOf(nodeDst), graph);
+            } else
+            {
+                // gunakan BFS
+            }
+
+            if (path.Count() > 0)
+            {
+                // path ditemukan
+                UpdateGraph(path); // update visual graph
+            }
+
+            return this; // supaya dapat dilakukan method-chaining
+        }
+
+        private void UpdateGraph(List<int> path)
+        {
+            int i; string thisNode;
+            for (i = 0; i < path.Count(); i++) // traversal satu per satu pada path
+            {
+                thisNode = nodes[path[i]];
+                visualGraph.FindNode(thisNode).Attr.FillColor = Microsoft.Msagl.Drawing.Color.OrangeRed; // tandai node pada path dengan warna biru
+                if (i < path.Count()-1)
+                {
+                    string nextNode = nodes[path[i+1]];
+                    foreach(var e in visualGraph.Edges)
+                    {
+                        // cari edge dimana src = path[i] dan dst = path[i+1], atau sebaliknya
+                        if ( (e.Source.Equals(thisNode) && e.Target.Equals(nextNode))
+                            || (e.Source.Equals(nextNode) && e.Target.Equals(thisNode)) )
+                        {
+                            e.Attr.Color = Microsoft.Msagl.Drawing.Color.OrangeRed;
+                        }
+
+                    }
+                }
+            }
+
+            // return visualGraph;
+        }
+
+        public void SetNodeSrc(string node)
+        {
+            nodeSrc = node;
+        }
+
+        public void SetNodeDst(string node)
+        {
+            nodeDst = node;
+        }
+
+        public void SetAlgorithm(int choice)
+        {
+            this.choice = choice;
+        }
+
+        public Microsoft.Msagl.Drawing.Graph GetVisualGraph()
+        {
+            return visualGraph;
         }
     }
 }
