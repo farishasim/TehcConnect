@@ -20,6 +20,7 @@ namespace TubesGraph
 
         ThreadStart threadStart;
         Thread processingThread;
+        private bool locked = false; // for mutual exclusion
 
         public Form1()
         {
@@ -81,22 +82,33 @@ namespace TubesGraph
             comboBox2.Items.Clear();
             comboBox2.Items.AddRange(allNodes.ToArray());
 
-
+            /*
             threadStart = new ThreadStart(StartProcessing);
             processingThread = new Thread(threadStart);
 
             processingThread.Name = "Solving Process";
             processingThread.Start();
+            */
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (fileLoaded && !locked)
+            {
+                locked = true; // turn on lock
+
+                threadStart = new ThreadStart(StartProcessing);
+                processingThread = new Thread(threadStart);
+
+                processingThread.Name = "Solving Process";
+                processingThread.Start();
+            }
         }
 
         private void StartProcessing()
         {
             // thread process
-            // thread ini akan melakukan process algoritma
-
-            // testing A -> H
-            Process.SetNodeSrc("A");
-            Process.SetNodeDst("H");
+            // thread ini akan melakukan proses algoritma
 
             Process.SetAlgorithm(1); // test dfs
 
@@ -105,14 +117,8 @@ namespace TubesGraph
             delUpdateVisGraph DelUpdateVisGraph = new delUpdateVisGraph(VisualizeGraph);
 
             this.gViewer1.BeginInvoke(DelUpdateVisGraph, Process.GetVisualGraph());
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (fileLoaded)
-            {
-
-            }
+            locked = false; // turn off lock
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -138,7 +144,8 @@ namespace TubesGraph
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            string selectedNode = comboBox1.SelectedItem.ToString();
+            Process.SetNodeSrc(selectedNode);
         }      
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -146,14 +153,10 @@ namespace TubesGraph
 
         }
 
-        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            string selectedNode = comboBox2.SelectedItem.ToString();
+            Process.SetNodeDst(selectedNode);
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
