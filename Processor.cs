@@ -73,14 +73,14 @@ namespace TubesGraph
             {
                 graph.AddNode(nodes.IndexOf(node));
             }
-            /*
+            
             for (int i = 0; i < totalEdge; i++)
             {
                 graph.AddEdge(nodes.IndexOf(nodeIn[i]), nodes.IndexOf(nodeOut[i]));
-                this.edges[i][0] = nodeOut[i];
-                this.edges[i][1] = nodeIn[i];
+                // this.edges[i][0] = nodeOut[i];
+                // this.edges[i][1] = nodeIn[i];
             }
-            */
+            
         }
 
         public Microsoft.Msagl.Drawing.Graph process()
@@ -116,18 +116,18 @@ namespace TubesGraph
 
             this.process(); // reset visual graph
 
-            if (choice == 1)
+            if (choice == 2)
             {
                 // gunakan DFS
                 searcher = new DFSearcher(this, form1);
                 path = searcher.Search(nodes.IndexOf(nodeSrc), nodes.IndexOf(nodeDst), graph);
-            } 
-            //else
-            //{
+            }
+            else if (choice == 1)
+            {
                 // gunakan BFS
-               // searcher = new BFSearcher(this, form1);
-               // path = searcher.Search(nodes.IndexOf(nodeSrc), nodes.IndexOf(nodeDst), graph);
-            //}
+                searcher = new BFSearcher(this, form1);
+                path = searcher.Search(nodes.IndexOf(nodeSrc), nodes.IndexOf(nodeDst), graph);
+            }
 
             if (path.Count() > 0)
             {

@@ -11,6 +11,7 @@ namespace TubesGraph
         private bool[] visited;
         private List<int> path;
         private Queue<int> queue;
+        private Queue<List<int>> nodePath;
 
         private Processor processor;
         private Form1 form1;
@@ -36,20 +37,26 @@ namespace TubesGraph
 
             path = new List<int>();
             queue = new Queue<int>();
+            nodePath = new Queue<List<int>>();
         }
 
         public List<int> Search(int node1, int node2, Graph graph)
         {
             bool found = false;
+            List<int> currentPath = new List<int>();
             Initial(graph.CountNode());
 
             queue.Enqueue(node1);
+            currentPath.Add(node1);
+
+            nodePath.Enqueue(currentPath);
 
             while (queue.Count != 0 && !found)
             {
                 int node = queue.Dequeue();
+                path = nodePath.Dequeue();
                 visited[node] = true;
-                found = BreadthFirstSearch(graph, node,  node2);
+                found = BreadthFirstSearch(graph, node, node2);
             } 
 
             return path;
@@ -64,7 +71,6 @@ namespace TubesGraph
             else
             {
                 ExpandNode(graph, node);
-                path.Add(node);
                 return false;
             }
         }
@@ -76,11 +82,19 @@ namespace TubesGraph
             {
                 if (graph.FindEdge(node,i) && !visited[i])
                 {
+                    // tambahkan node i ke queue
                     queue.Enqueue(i);
+
+                    // tambahkan path menuju node i ke stack
+                    path.Add(i);
+
+                    List<int> newPath = new List<int>(path);
+
+                    nodePath.Enqueue(newPath);
+                    path.Remove(i);
                 }
             }
         }
-
 
         private void VisualizeStep()
         {

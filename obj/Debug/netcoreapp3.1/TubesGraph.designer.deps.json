@@ -6,45 +6,20 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "AutomaticGraphLayout/1.1.11": {
-        "runtime": {
-          "lib/netstandard2.0/AutomaticGraphLayout.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
+      "AutomaticGraphLayout/1.1.11": {},
       "AutomaticGraphLayout.Drawing/1.1.11": {
         "dependencies": {
           "AutomaticGraphLayout": "1.1.11"
-        },
-        "runtime": {
-          "lib/netstandard2.0/AutomaticGraphLayout.Drawing.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
         }
       },
       "AutomaticGraphLayout.GraphViewerGDI/1.1.11": {
         "dependencies": {
           "AutomaticGraphLayout.Drawing": "1.1.11"
-        },
-        "runtime": {
-          "lib/netcoreapp3.1/Microsoft.Msagl.GraphViewerGdi.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
         }
       },
       "AutomaticGraphLayout.WpfGraphControl/1.1.11": {
         "dependencies": {
           "AutomaticGraphLayout.Drawing": "1.1.11"
-        },
-        "runtime": {
-          "lib/netcoreapp3.1/Microsoft.Msagl.WpfGraphControl.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
         }
       }
     }

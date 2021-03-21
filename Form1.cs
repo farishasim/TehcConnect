@@ -112,8 +112,6 @@ namespace TubesGraph
             // thread process
             // thread ini akan melakukan proses algoritma
 
-            Process.SetAlgorithm(1); // test dfs
-
             Process.ProcessPath();
 
             delUpdateVisGraph DelUpdateVisGraph = new delUpdateVisGraph(VisualizeGraph);
@@ -164,11 +162,13 @@ namespace TubesGraph
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             radioButton2.AutoCheck = true;
+            Process.SetAlgorithm(1);
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             radioButton1.AutoCheck = true;
+            Process.SetAlgorithm(2);
         }
 
         public void UpdateGraphFromThread(Microsoft.Msagl.Drawing.Graph visualGraph)
