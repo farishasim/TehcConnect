@@ -45,6 +45,7 @@ namespace TubesGraph
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -231,15 +232,15 @@ namespace TubesGraph
             this.button2.Text = "Submit";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            /*
-            this.OpenFileBtn.Location = new System.Drawing.Point(332, 30);
-            this.OpenFileBtn.Name = "OpenFileBtn";
-            this.OpenFileBtn.Size = new System.Drawing.Size(92, 35);
-            this.OpenFileBtn.TabIndex = 0;
-            this.OpenFileBtn.Text = "Open File";
-            this.OpenFileBtn.UseVisualStyleBackColor = true;
-            this.OpenFileBtn.Click += new System.EventHandler(this.button1_Click);
-             */
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(156, 601);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(100, 96);
+            this.richTextBox2.TabIndex = 13;
+            this.richTextBox2.Text = "";
+            this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
             // 
             // Form1
             // 
@@ -247,6 +248,7 @@ namespace TubesGraph
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(941, 562);
+            this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -288,6 +290,7 @@ namespace TubesGraph
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RichTextBox richTextBox2;
     }
 }
 

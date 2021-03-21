@@ -146,6 +146,9 @@ namespace TubesGraph
         {
             string selectedNode = comboBox1.SelectedItem.ToString();
             Process.SetNodeSrc(selectedNode);
+
+            richTextBox2.Text = Process.GetAllMutual();
+            richTextBox2.Text = "Hello World\n";
         }      
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -181,6 +184,11 @@ namespace TubesGraph
         public void VisualizeGraph(Microsoft.Msagl.Drawing.Graph visualGraph)
         {
             this.gViewer1.Graph = visualGraph;
+        }
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

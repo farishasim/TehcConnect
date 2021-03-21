@@ -15,6 +15,7 @@ namespace TubesGraph
         public string[] nodeIn;
         public string[] nodeOut;
         public string[] allNode;
+        public string mutual;
 
         private int choice; // pilihan algoritma
         private Graph graph;
@@ -24,7 +25,7 @@ namespace TubesGraph
         private string nodeDst;
         private List<string> nodes;
         private List<List<string>> edges;
-        private List<string> mutuals;
+        private List<string> listMutuals;
 
         private Form1 form1;
 
@@ -42,7 +43,8 @@ namespace TubesGraph
             this.SetupGraph(); 
             this.form1 = form1;
             this.edges = new List<List<string>>();
-            this.mutuals = new List<string>();
+            this.listMutuals = new List<string>();
+            this.mutual = "";
         }
 
         private void SetupNodes()
@@ -77,8 +79,6 @@ namespace TubesGraph
             for (int i = 0; i < totalEdge; i++)
             {
                 graph.AddEdge(nodes.IndexOf(nodeIn[i]), nodes.IndexOf(nodeOut[i]));
-                // this.edges[i][0] = nodeOut[i];
-                // this.edges[i][1] = nodeIn[i];
             }
             
         }
@@ -135,16 +135,7 @@ namespace TubesGraph
                 UpdateGraph(path); // update visual graph
             }
 
-            /*
-            for(int i=0; i<this.edges.Count(); i++)
-            {
-                if(this.edges[i][1] == this.edges[this.edges[i].IndexOf(nodeSrc)][1] && this.edges[i][0] == this.edges[this.edges[i].IndexOf(nodeDst)][0])
-                {
-                   mutuals.Add(this.edges[i][0]);
-                }
-            }
-            */
-
+      
             //return this; // supaya dapat dilakukan method-chaining
         }
 
@@ -192,6 +183,51 @@ namespace TubesGraph
         public Microsoft.Msagl.Drawing.Graph GetVisualGraph()
         {
             return visualGraph;
+        }
+
+        public string GetMutual(string nodeSrc, string nodeFirstDeg)
+        {
+
+            for (int i = 0; i < nodeOut.Count(); i++)
+            {
+                for (int j = 0; j < nodeIn.Count(); j++)
+                {
+                    if (nodeOut[i] == nodeIn[j] && nodeOut[j] == nodeSrc && nodeIn[i] == nodeDst)
+                    {
+                        listMutuals.Add(nodeOut[i]);
+                    }
+                }
+            }
+
+            this.mutual = "";
+            mutual += listMutuals.Count() + " Mutual Friends : ";
+            for (int i = 0; i < listMutuals.Count(); i++)
+            {
+                if (i != listMutuals.Count() - 1)
+                {
+                    mutual += listMutuals[i] + " ,";
+                }
+                else
+                {
+                    mutual += listMutuals[i];
+                }
+            }
+
+            return mutual;
+        }
+
+        public string GetAllMutual()
+        {
+            string mutualAll = "";
+            BFSearcher searcher = new BFSearcher();
+            List<int> firstDegree = searcher.GetListFirstDegree(nodes.IndexOf(nodeSrc), graph);
+
+            foreach(int idx in firstDegree)
+            {
+                mutualAll.Concat(GetMutual(nodeSrc, nodes[idx])).Concat("\n\n");
+            }
+
+            return mutualAll;
         }
     }
 }

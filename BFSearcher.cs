@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace TubesGraph
 {
     class BFSearcher : Searcher
     {
-        private bool[] visited;
-        private List<int> path;
-        private Queue<int> queue; // queue berisi node yang akan dikunjungi
-        private Queue<List<int>> nodePath; // queue berisi path menuju node yang akan dikunjungi
+            private bool[] visited;
+            private List<int> path;
+            private Queue<int> queue; // queue berisi node yang akan dikunjungi
+            private Queue<List<int>> nodePath; // queue berisi path menuju node yang akan dikunjungi
 
         private Processor processor;
         private Form1 form1;
@@ -68,6 +69,12 @@ namespace TubesGraph
                 found = BreadthFirstSearch(graph, node, node2);
             } 
 
+            if (!found)
+            {
+                // path tidak ditemukan
+                path.Clear();
+            }
+
             return path;
         }
 
@@ -107,6 +114,36 @@ namespace TubesGraph
                     path.Remove(i);
                 }
             }
+        }
+
+        public List<int> GetListFirstDegree(int nodeSrc, Graph graph)
+        {
+            Queue<int> friends = new Queue<int>();
+
+            Initial(graph.CountNode());
+
+            visited[nodeSrc] = true;
+
+            ExpandNode(graph, nodeSrc);
+
+            while (queue.Count != 0)
+            {
+                int node = queue.Dequeue();
+                visited[node] = true;
+                friends.Enqueue(node);
+            }
+
+            while (friends.Count != 0)
+            {
+                int node = friends.Dequeue();
+                ExpandNode(graph, node);
+            }
+
+            List<int> list = new List<int>(queue);
+
+            list = list.Distinct().ToList();
+
+            return list;
         }
 
         private void VisualizeStep()
