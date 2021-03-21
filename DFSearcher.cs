@@ -76,6 +76,8 @@ namespace TubesGraph
 
                     // masukkan node ke path
                     path.Add(i);
+
+                    // tampilkan step
                     VisualizeStep();
 
                     // periksa secara rekursif untuk node selanjutnya secara DFS
