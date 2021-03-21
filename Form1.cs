@@ -103,6 +103,8 @@ namespace TubesGraph
                 processingThread.Name = "Solving Process";
                 processingThread.Start();
             }
+
+
         }
 
         private void StartProcessing()

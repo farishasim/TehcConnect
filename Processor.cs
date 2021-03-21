@@ -23,6 +23,8 @@ namespace TubesGraph
         private string nodeSrc;
         private string nodeDst;
         private List<string> nodes;
+        private List<List<string>> edges;
+        private List<string> mutuals;
 
         private Form1 form1;
 
@@ -37,8 +39,10 @@ namespace TubesGraph
             this.fileLines = File.ReadAllLines(fileName);
             this.totalEdge = int.Parse(this.fileLines[0]);
             this.SetupNodes();
-            this.SetupGraph();
+            this.SetupGraph(); 
             this.form1 = form1;
+            this.edges = new List<List<string>>();
+            this.mutuals = new List<string>();
         }
 
         private void SetupNodes()
@@ -64,22 +68,30 @@ namespace TubesGraph
         private void SetupGraph()
         {
             graph = new Graph(nodes.Count());
+
             foreach (string node in nodes)
             {
                 graph.AddNode(nodes.IndexOf(node));
             }
+            /*
             for (int i = 0; i < totalEdge; i++)
             {
                 graph.AddEdge(nodes.IndexOf(nodeIn[i]), nodes.IndexOf(nodeOut[i]));
+                this.edges[i][0] = nodeOut[i];
+                this.edges[i][1] = nodeIn[i];
             }
+            */
         }
 
         public Microsoft.Msagl.Drawing.Graph process()
         {
             this.visualGraph = new Microsoft.Msagl.Drawing.Graph("graph");
 
+
+
             for (int i = 0; i < this.totalEdge; i++)
             {
+                
                 // graph.AddEdge(this.nodeOut[i], this.nodeIn[i]).Attr.Color = Microsoft.Msagl.Drawing.Color.MediumSpringGreen;
                 var Edge = visualGraph.AddEdge(this.nodeOut[i], this.nodeIn[i]);
 
@@ -109,16 +121,29 @@ namespace TubesGraph
                 // gunakan DFS
                 searcher = new DFSearcher(this, form1);
                 path = searcher.Search(nodes.IndexOf(nodeSrc), nodes.IndexOf(nodeDst), graph);
-            } else
-            {
+            } 
+            //else
+            //{
                 // gunakan BFS
-            }
+               // searcher = new BFSearcher(this, form1);
+               // path = searcher.Search(nodes.IndexOf(nodeSrc), nodes.IndexOf(nodeDst), graph);
+            //}
 
             if (path.Count() > 0)
             {
                 // path ditemukan
                 UpdateGraph(path); // update visual graph
             }
+
+            /*
+            for(int i=0; i<this.edges.Count(); i++)
+            {
+                if(this.edges[i][1] == this.edges[this.edges[i].IndexOf(nodeSrc)][1] && this.edges[i][0] == this.edges[this.edges[i].IndexOf(nodeDst)][0])
+                {
+                   mutuals.Add(this.edges[i][0]);
+                }
+            }
+            */
 
             //return this; // supaya dapat dilakukan method-chaining
         }
