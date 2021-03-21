@@ -148,7 +148,6 @@ namespace TubesGraph
             Process.SetNodeSrc(selectedNode);
 
             richTextBox2.Text = Process.GetAllMutual();
-            richTextBox2.Text = "Hello World\n";
         }      
 
         private void groupBox1_Enter(object sender, EventArgs e)

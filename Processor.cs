@@ -40,7 +40,7 @@ namespace TubesGraph
             this.fileLines = File.ReadAllLines(fileName);
             this.totalEdge = int.Parse(this.fileLines[0]);
             this.SetupNodes();
-            this.SetupGraph(); 
+            this.SetupGraph();
             this.form1 = form1;
             this.edges = new List<List<string>>();
             this.listMutuals = new List<string>();
@@ -75,12 +75,12 @@ namespace TubesGraph
             {
                 graph.AddNode(nodes.IndexOf(node));
             }
-            
+
             for (int i = 0; i < totalEdge; i++)
             {
                 graph.AddEdge(nodes.IndexOf(nodeIn[i]), nodes.IndexOf(nodeOut[i]));
             }
-            
+
         }
 
         public Microsoft.Msagl.Drawing.Graph process()
@@ -91,7 +91,7 @@ namespace TubesGraph
 
             for (int i = 0; i < this.totalEdge; i++)
             {
-                
+
                 // graph.AddEdge(this.nodeOut[i], this.nodeIn[i]).Attr.Color = Microsoft.Msagl.Drawing.Color.MediumSpringGreen;
                 var Edge = visualGraph.AddEdge(this.nodeOut[i], this.nodeIn[i]);
 
@@ -135,7 +135,7 @@ namespace TubesGraph
                 UpdateGraph(path); // update visual graph
             }
 
-      
+
             //return this; // supaya dapat dilakukan method-chaining
         }
 
@@ -146,14 +146,14 @@ namespace TubesGraph
             {
                 thisNode = nodes[path[i]];
                 visualGraph.FindNode(thisNode).Attr.FillColor = Microsoft.Msagl.Drawing.Color.OrangeRed; // tandai node pada path dengan warna biru
-                if (i < path.Count()-1)
+                if (i < path.Count() - 1)
                 {
-                    string nextNode = nodes[path[i+1]];
-                    foreach(var e in visualGraph.Edges)
+                    string nextNode = nodes[path[i + 1]];
+                    foreach (var e in visualGraph.Edges)
                     {
                         // cari edge dimana src = path[i] dan dst = path[i+1], atau sebaliknya
-                        if ( (e.Source.Equals(thisNode) && e.Target.Equals(nextNode))
-                            || (e.Source.Equals(nextNode) && e.Target.Equals(thisNode)) )
+                        if ((e.Source.Equals(thisNode) && e.Target.Equals(nextNode))
+                            || (e.Source.Equals(nextNode) && e.Target.Equals(thisNode)))
                         {
                             e.Attr.Color = Microsoft.Msagl.Drawing.Color.OrangeRed;
                         }
@@ -185,22 +185,22 @@ namespace TubesGraph
             return visualGraph;
         }
 
-        public string GetMutual(string nodeSrc, string nodeFirstDeg)
+        public string GetMutual(string nodeSrc, string nodeDst)
         {
+            listMutuals.Clear(); // reset si listnya biar gk numpuk terus
 
-            for (int i = 0; i < nodeOut.Count(); i++)
+            for (int i = 0; i < nodes.Count(); i++)
             {
-                for (int j = 0; j < nodeIn.Count(); j++)
+                if (nodeSrc != nodes[i]
+                    && graph.FindEdge(nodes.IndexOf(nodeSrc), i) 
+                    && graph.FindEdge(i, nodes.IndexOf(nodeDst)))
                 {
-                    if (nodeOut[i] == nodeIn[j] && nodeOut[j] == nodeSrc && nodeIn[i] == nodeDst)
-                    {
-                        listMutuals.Add(nodeOut[i]);
-                    }
+                    listMutuals.Add(nodes[i]);
                 }
             }
 
             this.mutual = "";
-            mutual += listMutuals.Count() + " Mutual Friends : ";
+            mutual += nodeDst + " has " + listMutuals.Count() + " Mutual Friends : "; // ditambahin nodeDst biar jelas punya siapa
             for (int i = 0; i < listMutuals.Count(); i++)
             {
                 if (i != listMutuals.Count() - 1)
@@ -222,13 +222,12 @@ namespace TubesGraph
             BFSearcher searcher = new BFSearcher();
             List<int> firstDegree = searcher.GetListFirstDegree(nodes.IndexOf(nodeSrc), graph);
 
-            foreach(int idx in firstDegree)
+            foreach (int idx in firstDegree)
             {
-                mutualAll.Concat(GetMutual(nodeSrc, nodes[idx])).Concat("\n\n");
+                mutualAll += GetMutual(nodeSrc, nodes[idx]) + "\n\n";
             }
 
             return mutualAll;
         }
     }
 }
-
