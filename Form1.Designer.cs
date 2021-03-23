@@ -109,7 +109,7 @@ namespace TubesGraph
             this.gViewer1.InsertingEdge = false;
             this.gViewer1.LayoutAlgorithmSettingsButtonVisible = false;
             this.gViewer1.LayoutEditingEnabled = true;
-            this.gViewer1.Location = new System.Drawing.Point(156, 292);
+            this.gViewer1.Location = new System.Drawing.Point(124, 292);
             this.gViewer1.LooseOffsetForRouting = 0.25D;
             this.gViewer1.MouseHitDistance = 0.05D;
             this.gViewer1.Name = "gViewer1";
@@ -186,9 +186,9 @@ namespace TubesGraph
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(26, 41);
+            this.comboBox1.Location = new System.Drawing.Point(31, 41);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.Size = new System.Drawing.Size(74, 23);
             this.comboBox1.Sorted = true;
             this.comboBox1.TabIndex = 50;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
@@ -196,9 +196,9 @@ namespace TubesGraph
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.comboBox1);
-            this.groupBox3.Location = new System.Drawing.Point(587, 301);
+            this.groupBox3.Location = new System.Drawing.Point(518, 305);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(179, 100);
+            this.groupBox3.Size = new System.Drawing.Size(134, 100);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Choose Account :";
@@ -206,9 +206,9 @@ namespace TubesGraph
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.comboBox2);
-            this.groupBox4.Location = new System.Drawing.Point(587, 425);
+            this.groupBox4.Location = new System.Drawing.Point(708, 305);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(179, 100);
+            this.groupBox4.Size = new System.Drawing.Size(132, 100);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Explore friends with :";
@@ -216,18 +216,18 @@ namespace TubesGraph
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(26, 41);
+            this.comboBox2.Location = new System.Drawing.Point(32, 41);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 23);
+            this.comboBox2.Size = new System.Drawing.Size(68, 23);
             this.comboBox2.Sorted = true;
             this.comboBox2.TabIndex = 50;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(626, 545);
+            this.button2.Location = new System.Drawing.Point(629, 427);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(105, 29);
+            this.button2.Size = new System.Drawing.Size(105, 35);
             this.button2.TabIndex = 12;
             this.button2.Text = "Submit";
             this.button2.UseVisualStyleBackColor = true;
@@ -235,9 +235,9 @@ namespace TubesGraph
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(156, 601);
+            this.richTextBox2.Location = new System.Drawing.Point(518, 489);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(100, 96);
+            this.richTextBox2.Size = new System.Drawing.Size(322, 96);
             this.richTextBox2.TabIndex = 13;
             this.richTextBox2.Text = "";
             this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
@@ -247,7 +247,7 @@ namespace TubesGraph
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(941, 562);
+            this.ClientSize = new System.Drawing.Size(880, 663);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox4);
@@ -259,7 +259,7 @@ namespace TubesGraph
             this.Controls.Add(this.pictureBox1);
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "TehcConnect";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);

@@ -200,7 +200,7 @@ namespace TubesGraph
             }
 
             this.mutual = "";
-            mutual += nodeDst + " has " + listMutuals.Count() + " Mutual Friends : "; // ditambahin nodeDst biar jelas punya siapa
+            mutual += nodeDst +"\n" +listMutuals.Count() + " Mutual Friends : "; // ditambahin nodeDst biar jelas punya siapa
             for (int i = 0; i < listMutuals.Count(); i++)
             {
                 if (i != listMutuals.Count() - 1)
