@@ -17,6 +17,7 @@ namespace TubesGraph
         private Processor Process;
         private bool fileLoaded;
         public delegate void delUpdateVisGraph(Microsoft.Msagl.Drawing.Graph graph);
+        public delegate void delUpdateTextBox2(string text);
 
         ThreadStart threadStart;
         Thread processingThread;
@@ -118,6 +119,8 @@ namespace TubesGraph
 
             this.gViewer1.BeginInvoke(DelUpdateVisGraph, Process.GetVisualGraph());
 
+            UpdateTextFromThread(Process.GetTextForTextBox2());
+
             locked = false; // turn off lock
         }
 
@@ -188,6 +191,17 @@ namespace TubesGraph
         private void richTextBox2_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        public void UpdateTextFromThread(string newText)
+        {
+            delUpdateTextBox2 DelUpdateTextBox2 = new delUpdateTextBox2(ChangeTextBox2);
+            this.richTextBox2.BeginInvoke(DelUpdateTextBox2, newText);
+        }
+
+        public void ChangeTextBox2(string text)
+        {
+            this.richTextBox2.Text = text;
         }
     }
 }

@@ -24,8 +24,9 @@ namespace TubesGraph
         private string nodeSrc;
         private string nodeDst;
         private List<string> nodes;
-        private List<List<string>> edges;
-        private List<string> listMutuals;
+        private List<List<string>> listAllMutual;
+        private string mutualAll;
+        private string exploreResult;
 
         private Form1 form1;
 
@@ -42,9 +43,10 @@ namespace TubesGraph
             this.SetupNodes();
             this.SetupGraph();
             this.form1 = form1;
-            this.edges = new List<List<string>>();
-            this.listMutuals = new List<string>();
+            this.listAllMutual = new List<List<string>>();
             this.mutual = "";
+            this.mutualAll = "";
+            this.exploreResult = "";
         }
 
         private void SetupNodes()
@@ -113,10 +115,15 @@ namespace TubesGraph
         {
             List<int> path = new List<int>();
             Searcher searcher;
+            string message = "";
 
             this.process(); // reset visual graph
 
-            if (choice == 2)
+            if (choice == 0)
+            {
+                return;
+            }
+            else if (choice == 2)
             {
                 // gunakan DFS
                 searcher = new DFSearcher(this, form1);
@@ -133,8 +140,14 @@ namespace TubesGraph
             {
                 // jika jalur tidak ditemukan, reset graph
                 process();
+                message += "No connection found from " + nodeSrc + " to " + nodeDst + "\n";
+            } else
+            {
+                message += "Account : " + nodeSrc + " and " + nodeDst + "\n";
+                message += (path.Count()-2) + "-degree connection found\n";
             }
 
+            exploreResult = message + "\n";
             //return this; // supaya dapat dilakukan method-chaining
         }
 
@@ -184,22 +197,39 @@ namespace TubesGraph
             return visualGraph;
         }
 
-        public string GetMutual(string nodeSrc, string nodeDst)
+        public void AddMutual(string nodeSrc, string nodeDst)
         {
-            listMutuals.Clear(); // reset si listnya biar gk numpuk terus
+            List<string> listMutuals = new List<string>();
+
+            string recommendedNode = new string(nodeDst);
+            listMutuals.Add(recommendedNode);
 
             for (int i = 0; i < nodes.Count(); i++)
             {
                 if (nodeSrc != nodes[i]
-                    && graph.FindEdge(nodes.IndexOf(nodeSrc), i) 
+                    && graph.FindEdge(nodes.IndexOf(nodeSrc), i)
                     && graph.FindEdge(i, nodes.IndexOf(nodeDst)))
                 {
                     listMutuals.Add(nodes[i]);
                 }
             }
 
+            this.listAllMutual.Add(listMutuals);
+        }
+
+        public string GetMutual(List<string> listMutuals)
+        {
+            string thatNode = listMutuals.First();
+
+            listMutuals.RemoveAt(0);
+
+            if (listMutuals.Count() == 0)
+            {
+                return "";
+            }
+
             this.mutual = "";
-            mutual += nodeDst +"\n" +listMutuals.Count() + " Mutual Friends : "; // ditambahin nodeDst biar jelas punya siapa
+            mutual += thatNode +"\n" +listMutuals.Count() + " Mutual Friends : "; // ditambahin nodeDst biar jelas punya siapa
             for (int i = 0; i < listMutuals.Count(); i++)
             {
                 if (i != listMutuals.Count() - 1)
@@ -217,16 +247,30 @@ namespace TubesGraph
 
         public string GetAllMutual()
         {
-            string mutualAll = "";
+            mutualAll = "";
             BFSearcher searcher = new BFSearcher();
             List<int> firstDegree = searcher.GetListFirstDegree(nodes.IndexOf(nodeSrc), graph);
+            listAllMutual = new List<List<string>>();
 
             foreach (int idx in firstDegree)
             {
-                mutualAll += GetMutual(nodeSrc, nodes[idx]) + "\n\n";
+                AddMutual(nodeSrc, nodes[idx]);
+            }
+
+            listAllMutual = listAllMutual.OrderBy(list => list.Count()).Reverse().ToList();
+
+            mutualAll += "Friend Recommendation for " + nodeSrc + " :\n\n";
+            foreach (List<string> listMutuals in listAllMutual)
+            {
+                mutualAll += GetMutual(listMutuals) + "\n\n";
             }
 
             return mutualAll;
+        }
+
+        public string GetTextForTextBox2()
+        {
+            return this.exploreResult + this.mutualAll;
         }
     }
 }
