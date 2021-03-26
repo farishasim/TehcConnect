@@ -17,6 +17,8 @@ kemudian jalankan TubesGraph.exe, dengan cara klik dua kali.
 
 ## Cara Pemakaian
 
+![Running App](/Properties/Run.gif)
+
 Untuk menggunakan aplikasi ini, 
 - Jalankan terlebih dahulu aplikasi ini, kemudian 
 - Tekan tombol `Open File` untuk memasukkan file yang berisi graf beserta edge nya. Beberapa file yang siap pakai sudah disediakan pada folder `test`
