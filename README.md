@@ -10,7 +10,7 @@ Dengan memanfaatkan algoritma Breadth First Search (BFS) dan Depth First Search 
 Aplikasi ini dapat dijalankan di Windows. Untuk melakukan instalasi program lakukan langkah-langkah berikut
 - clone repositori ini
 ```
-git clone https://github.com/almeizaarvin/TubesGraph.git
+git clone https://github.com/farishasim/TehcConnect.git
 ```
 - Untuk menjalankan aplikasi masuk ke direktori `bin > release > netcoreapp3.1`,
 kemudian jalankan TubesGraph.exe, dengan cara klik dua kali.
